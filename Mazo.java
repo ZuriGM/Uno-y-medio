@@ -1,3 +1,10 @@
+//! \class Clase mazo de Uno y Medio
+
+/*!
+  Clase encargada de representar armar el deck inicial 
+  Crea, almacena, baraja/revuelve y copia el deck inicial de 64 cartas especiales y 9 cartas especiales en arreglos de tipo Carta para su posterior uso.
+*/
+
 import javax.swing.*;
 public class Mazo{
 	
@@ -63,7 +70,11 @@ public class Mazo{
 		}
 	}
 
-
+	/*! \brief baraja/revuelve el mazo
+    *
+    * intercambio las celdas del arreglo de forma aleatoria
+    * 
+    */
 	public void revolver(){
 		for (int  i = 0 ; i  < cartas.length; i++){
 			int aleatorio = (int)(Math.random()*73);
@@ -71,6 +82,12 @@ public class Mazo{
 		}
 	}
 
+	/*! \brief intercambia valores entre celdas de un mismo arreglo
+    *
+    \param Carta[] es un arreglo de tipo carta
+    \param int entero que indica la casilla de uno de los numeros a intecambiar
+    \param int entero que indica la casilla de uno de los numeros a intecambiar
+    */
 	private void intercambiarValores(Carta [] arregloReferencia, int indice1, int indice2){
 		if (indice1 >=0 && indice2 >= 0 && indice1 < arregloReferencia.length && indice2 < arregloReferencia.length){
 			Carta contadororal = arregloReferencia[indice1];
@@ -79,12 +96,22 @@ public class Mazo{
 		}
 	}
 
+	/*! \brief imprime las cartas
+    *
+    * Imprime el valor almacenado en las celdas, corresponde a cada carta dentro del arreglo
+    * 
+    */
 	public void imprimir(){
 		for(int i = 0 ; i< this.cartas.length; i++){
 			System.out.println(this.cartas[i]);
 		}
 	}
 
+	/*! \brief Convierte a String el valor numerico de la carta
+    *
+    * Convierte el valor recibido a un String y le agrega el color.
+    * 
+    */
 	public String toString(){
 		String contenido = "";
 		for(int i = 0 ; i< this.cartas.length; i++){
@@ -92,7 +119,10 @@ public class Mazo{
 		}
 		return contenido;
 	}
-
+	/*! \brief imprime el numero de la carta
+    *
+    \param Int entero que contiene el valor numero de una carta
+    */
 	public void imprimirNumero(int numeroCarta){
 		int numero = this.cartas[numeroCarta].getNumero();
 		System.out.println(numero);

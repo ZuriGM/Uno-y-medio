@@ -1,3 +1,12 @@
+//! \class Clase Interfaz que se utiliza para pedir datos al jugador/usuario
+
+/*!
+  Clase encargada de representar una carta de un deck. 
+  Convierte hileras de texto a numeros enteros
+  y los modifica para imprimir al usuario datos más facilmente
+*/
+
+
 import javax.swing.JOptionPane;
 
 public class Interfaz {
