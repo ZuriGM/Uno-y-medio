@@ -16,16 +16,27 @@ public class Juego{
 		boolean jugador2IA = false; ///< booleano que indica si el juego está pensado para jugar contra la IA o conta un segundo jugador modo "hot seat"
 		boolean condicionGanar = false; ///< booleano que indica si se cumplió o no la condición para salir del ciclo del juego
 		int turno = 2; ///< entero que se utiliza para calcular quién controla el turno; jugador 1, jugador 2 o el "CPU"
+		String[] cartasJugadas;
+		Mazo[] mazoParaEsteJuego = new Mazo[73];
+		Jugador jugador1 = new Jugador();
+		Jugador jugador2 = new Jugador();
+		Jugador jugador3 = new Jugador();
+
+
+	public boolean ponerCartaValida1(){
+		System.out.println("la ultima carta en la pila de cartas jugadas es: " + ultimaCarta());
+
+
+		jugador1.imprimirCartasJugador();
+		int numeroDeCelda = interfaz1.solicitarNumeroEntero("cual celda/carta desea jugar?");
+		Mazo[] cartas = jugador1.getCartasJugador();
+		Mazo cartasReducido = cartas[numeroDeCelda];
+
+		return false;
 		
-		Mazo mazo = new Mazo();
-		Mazo mazoParaEsteJuego = new Mazo();
-
-
-	/*! \brief determina si la partida es de dos jugadores o de uno contra la CPU
-	 *
-	 * pregunta la cantidad de jugadores y compara el dato recibido,
-	   si son dos jugadores entonces devuelve false, lo que indica que el jugador 2 no es el CPU si no un jugador
-	 */
+		
+	}
+	
 	public boolean jugador2EsIA (){
 		if (this.cantidadJugadores > 0 && cantidadJugadores <= 2){
 
@@ -43,31 +54,12 @@ public class Juego{
 		}
 	} 
 
-	/*! \brief Agrega 2 cartas a la mano del jugadores
-	 * este método agrega ejecuta una accion llamada come 2, que agrega 2 cartas a la mano de un jugador x cantidad de veces (cantidad de cartas come dos acuimuladas)
-	 * 
-	 */
-	public void come2 (String[] deck){
-
-		//for(int i = 0; i<=contadorCome2; i++){
-		//	deck[indiceDelMazo] = mazo ....
-		//}
-	}
-
-	/*! \brief ejecuta la acción de buscar cartas en la pila de cartas ya jugadas
-	 * este método imprime la lista de cartas ya jugadas y le permite al jugador elegir una carta
-	 * 
-	 */
-	public void buscarEnPila(){
-	//	imprimirPila();
-	//	agarrarDePila();
-	}
 	/*! \brief guarda la ultima carta jugada
 	 * guarda la ultima carta jugada en un String para utilizarse cuando se verifica la ultima carta al inicio de cada turno
 	 * 
 	 */
 	public String ultimaCarta(){
-		return "a";
+		return "7 Azul";
 	}
 
 
@@ -75,66 +67,86 @@ public class Juego{
 	 * Método principal que se encarga de ejectar los ciclos para cada uno de los dos tipos de partidas (un jugador y dos jugadores)
 	 * 
 	 */
-	public void Jugar(){
+	public void jugar(){
 	
 	if(jugador2IA == false){
 		
-		/*while(condicionGanar == false){
+		while(condicionGanar == false){
 
 			while(turno % 2 == 0){
 
-				ultimaCarta();
+				String x = ultimaCarta();
 
-				if(int x==9){
+				if(x.charAt(0)==9){
 					contadorCome2 = 0;
-					turno++;
 				}
 
-				else if(int==10){
-					buscarEnPila();
+				else if(x.charAt(0)==10){
+					jugador1.buscarEnPila(mazoParaEsteJuego);
 				}
 
-				else if(int==8){
+				else if(x.charAt(0)==8){
+					contadorCome2++;
 					contadorCome2++;
 					turno++;
 				}
 				else{
-					ponerCartaValida();
-					comer2();
+					if(contadorCome2!=0){
+						jugador1.come2(contadorCome2, mazoParaEsteJuego);
+						turno++;
+					}
+					
+					else{
+						ponerCartaValida1();
+						if(2>0){
+							System.out.println("felicidades ha ganado");
+							condicionGanar=true;
+						}
 
-					//preguntar condicionGanar = ?
+						else{
+						System.out.println("Es el turno del siguiente jugador");
+						turno++;
+						}
 
-					System.out.println("Es el turno del siguiente jugador")
-					turno++;
+					}
+				}
 			}
 
 			while(turno % 2 != 0){
+				String x = ultimaCarta();
 
-				ultimaCarta();
-
-				if(int=9){
+				if(x.charAt(0)==9){
 					contadorCome2 = 0;
 					turno++;
 				}
 
-				else if(int=10){
-					buscarEnPila();
+				else if(x.charAt(0)==10){
+					jugador2.buscarEnPila(mazoParaEsteJuego);
 				}
 
-				else if(int=8){
+				else if(x.charAt(0)==8){
 					contadorCome2++;
 					turno++;
 				}
 				else{
-					ponerCartaValida();
-					comer2();
+				ponerCartaValida1();
+				jugador2.come2(contadorCome2, mazoParaEsteJuego);
 
-					preguntar si cumple con la condicionGanar = ?
 
-					System.out.println("Es el turno del siguiente jugador")
-					turno++;
-			} */
+						/*jugador2.getCantidadCartas>=1*/
+					if(2>=1){
+						System.out.println("felicidades ha ganado");
+						condicionGanar=true;
+					}
+
+					else{
+						System.out.println("Es el turno del siguiente jugador");
+						turno++;
+					}
+				}
+			}
 		}
+	}
 
 	else{
 
@@ -142,90 +154,70 @@ public class Juego{
 
 			while(turno % 2 == 0){
 
-			/*	ultimaCarta();
+				String x = ultimaCarta();
 
-				if(int=9){
+				if(x.charAt(0)==9){
 					contadorCome2 = 0;
 					turno++;
 				}
 
-				else if(int=10){
-					buscarEnPila();
+				else if(x.charAt(0)==10){
+					jugador1.buscarEnPila(mazoParaEsteJuego);
 				}
 
-				else if(int=8){
+				else if(x.charAt(0)==8){
 					contadorCome2++;
 					turno++;
 				}
-				
 				else{
-					ponerCartaValida();
-					comer2();
+					ponerCartaValida1();
+					jugador1.come2(contadorCome2, mazoParaEsteJuego);
 
-					preguntar condicionGanar = ?
-
-					System.out.println("Es el turno del CPU")
+					System.out.println("Es el turno del CPU");
 					turno++;
+				}
 			}
 
 			while(turno % 2 != 0){
 
-				ultimaCarta();
+				String x = ultimaCarta();
 
-				if(int=9){
+				if(x.charAt(0)==9){
 					contadorCome2 = 0;
 					turno++;
 				}
 
-				else if(int=10){
-					buscarEnPilaCPU();
+				else if(x.charAt(0)==10){
+					jugador3.buscarEnPila(mazoParaEsteJuego);
 				}
 
-				else if(int=8){
+				else if(x.charAt(0)==8){
 					contadorCome2++;
 					turno++;
 				}
 
 				else{
-					ponerCartaValidaCPU();
-					comer2();
+					ponerCartaValida1();
+					if(2>0){
+							System.out.println("felicidades ha ganado");
+							condicionGanar=true;
+					}
 
-					preguntar condicionGanar = ?
+					else{
+						System.out.println("Es el turno del siguiente jugador");
+						turno++;
+					}
 
-					System.out.println("Es el turno del jugador")
-					turno++;
 				}
-			*/}
+			}
 		}
 	}
-	}
-
+}
 	public static void main(String[] args){
-
+		Juego juego = new Juego();
+		juego.jugar();
 	}
 }
-
-//imprimir "turno de la IA"//
-
-
-/*
-turno IA:
-
-revisa la ultima carta jugada
-
-si fue comer:  busque en todo el arreglo si hay un come, un busca pila o un cancelar y ponga el primero
-
-si fue un busca pila: busque en todo el arreglo si hay un come, un busca pila o un cancelar y ponga el primero
-
-si fue un cancelar: continue
-
-else: buscar una carta de igual color o numero.
-
-}
-
-}
-*/
-
 
 
 
